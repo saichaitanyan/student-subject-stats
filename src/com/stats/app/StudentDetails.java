@@ -1,12 +1,15 @@
 package com.stats.app;
 
+import com.stats.app.utility.Common;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
 public class StudentDetails {
     private int id;
     private String name;
-    private HashMap<String, Integer> marks;
+    static private HashMap<String, Integer> marks;
 
     private StudentDetails(int id, String name, HashMap<String, Integer> marks) {
         this.name = name;
@@ -14,9 +17,8 @@ public class StudentDetails {
         this.marks = marks;
     }
 
-
     private HashMap<String, Integer> getMarks() {
-        return marks;
+        return this.marks;
     }
 
     public int getId() {
@@ -44,18 +46,30 @@ public class StudentDetails {
     //    }
 
     static public void displayStudentDetails() {
+        ArrayList<HashMap<String, Object>> list = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            StudentDetails s = new StudentDetails(i, "Student" + (i + 1), GenerateMarks.generateStudentMarks());
+            HashMap<String, Integer> m = GenerateMarks.generateStudentMarks();
+            StudentDetails s = new StudentDetails(i, "Student" + (i + 1), m);
+            HashMap<String, Object> hashMap = new HashMap<>();
+
             Set<String> keys = s.getMarks().keySet();
             System.out.println("Name:  " + s.getName());
             System.out.print("Marks : ");
-            for (String key : keys
-            ) {
-//                System.out.print("");
-                System.out.print(key + " " + s.marks.get(key) + ", ");
+
+            for (String key : keys) {
+                System.out.print(key + " " + s.marks.get(key) + " ");
             }
             System.out.println();
+            hashMap.put("id", i);
+            hashMap.put("name", "Student" + (i + 1));
+            hashMap.put("marks", m);
+            list.add(hashMap);
+            System.out.println(list);
         }
+        System.out.println();
+        // Passing the arraylist with HashMap generics for furthuer purpose
+//        System.out.println(":::::::::::" + list);
+        Common.setList(list);
     }
 }
 

@@ -22,7 +22,6 @@ public class GenerateMarks {
             String subjectName = String.valueOf(subjectsList[selectRandomSubject]);
             map.put(subjectName, selectRandomMarks);
         }
-//        System.out.println(map);
         return map;
     }
 }
