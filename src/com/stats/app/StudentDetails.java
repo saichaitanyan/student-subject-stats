@@ -4,6 +4,7 @@ import com.stats.app.utility.Common;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 public class StudentDetails {
@@ -41,35 +42,41 @@ public class StudentDetails {
         this.name = name;
     }
 
-    //    public void displayStudentDetails() {
-    //        System.out.println(" Name: " + this.name + " Marks: " + this.marks);
-    //    }
-
+    /* Display the student details along with marks respectively*/
     static public void displayStudentDetails() {
         ArrayList<HashMap<String, Object>> list = new ArrayList<>();
+        ArrayList<Integer> subjectsTotalList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             HashMap<String, Integer> m = GenerateMarks.generateStudentMarks();
+
             StudentDetails s = new StudentDetails(i, "Student" + (i + 1), m);
+
             HashMap<String, Object> hashMap = new HashMap<>();
 
             Set<String> keys = s.getMarks().keySet();
             System.out.println("Name:  " + s.getName());
             System.out.print("Marks : ");
 
+            HashMap<String, Object> mappingData = new HashMap<>();
+
             for (String key : keys) {
                 System.out.print(key + " " + s.marks.get(key) + " ");
+                mappingData.put(key, s.marks.get(key));
             }
+
             System.out.println();
             hashMap.put("id", i);
             hashMap.put("name", "Student" + (i + 1));
-            hashMap.put("marks", m);
-            list.add(hashMap);
-            System.out.println(list);
+            hashMap.put("marks", mappingData);
+
+            list.add(hashMap);  // To store the complete students details
+            subjectsTotalList.add(mappingData.size());  // To store the total subjects attended by students
         }
         System.out.println();
-        // Passing the arraylist with HashMap generics for furthuer purpose
-//        System.out.println(":::::::::::" + list);
-        Common.setList(list);
+
+        Common.setList(list);         // Passing the arraylist with HashMap generics for furthuer purpose
+        Common.setTotalSubject(subjectsTotalList);    // Passing the arraylist with HashMap generics for furthuer purpose
+
     }
 }
 

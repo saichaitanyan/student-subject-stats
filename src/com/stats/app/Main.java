@@ -10,12 +10,11 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter to see Student status");
-/*
         String s = scanner.nextLine();
 
         if (s.equals("")) {
+            StudentStats studentStats = new StudentStats();
         }
-*/
     }
 
 }
