@@ -6,6 +6,7 @@ public class Common {
 
     private static Object object = null;
     private static ArrayList<Integer> totalSubject = new ArrayList<>();
+    private static ArrayList<Object> ObjectList = new ArrayList<>();
 
     public Common(ArrayList<HashMap<String, Object>> list) {
         System.out.println(list);
@@ -17,7 +18,16 @@ public class Common {
 
     /* Caculate the minimum,maximum & average marks*/
     public static void calculateMinMaxAvg() {
-        ArrayList<Integer> list = convertObjToArrayList(object);
+        ArrayList<Integer> list = convertObjValuesToArrayList(object);
+        int minIndex = minValueIndex(list);
+        int maxIndex = maxValueIndex(list);
+        int maxValue = list.get(maxIndex);
+        int minValue = list.get(minIndex);
+        System.out.println("Max: " + maxValue + ",  Min: " + minValue + ",  Avg: " + avgValue(list));
+    }
+
+    public static void calculateMinMaxAvg(ArrayList<Integer> arrayList) {
+        ArrayList<Integer> list = arrayList;
         int minIndex = minValueIndex(list);
         int maxIndex = maxValueIndex(list);
         int maxValue = list.get(maxIndex);
@@ -41,18 +51,19 @@ public class Common {
         return totalSubject;
     }
 
+    public static ArrayList<Object> getObjectList() {
+        return ObjectList;
+    }
+
     /* Method that return number of subject failed*/
     public static int noOfSubjetsFailed(Object obj) {
         object = obj;
-        ArrayList<Integer> totalMarks = convertObjToArrayList(obj);
+        ObjectList.add(object);
+        ArrayList<Integer> totalMarks = convertObjValuesToArrayList(obj);
         ArrayList<Integer> dummmyMarksList = new ArrayList<>(totalMarks);
         ArrayList<Integer> totalSubjectsFailed = new ArrayList<>();
-//        ArrayList<Integer> totalMarks = convertObjToArrayList(obj);
-//        ArrayList<Integer> dummmyMarksList = new ArrayList<>(totalMarks);
-//        ArrayList<Integer> totalSubjectsFailed = new ArrayList<>();
-
-        ArrayList<Integer> finalTotalMarks = totalMarks;
-        dummmyMarksList.forEach(mark -> {
+        ArrayList<Integer> finalTotalMarks = dummmyMarksList;
+        totalMarks.forEach(mark -> {
 
             int indexOfMinValue = minValueIndex(finalTotalMarks);
 
@@ -62,6 +73,23 @@ public class Common {
             }
         });
 //        totalMarks = dummmyMarksList;
+        return totalSubjectsFailed.size();
+    }/* Method that return number of subject failed*/
+
+    public static int noOfSubjetsFailed(ArrayList<Integer> obj) {
+        ArrayList<Integer> totalMarks = obj;
+        ArrayList<Integer> dummmyMarksList = new ArrayList<>(totalMarks);
+        ArrayList<Integer> totalSubjectsFailed = new ArrayList<>();
+        ArrayList<Integer> finalTotalMarks = dummmyMarksList;
+        totalMarks.forEach(mark -> {
+
+            int indexOfMinValue = minValueIndex(finalTotalMarks);
+
+            if (finalTotalMarks.get(indexOfMinValue) < 25) {
+                totalSubjectsFailed.add(finalTotalMarks.get(indexOfMinValue));
+                finalTotalMarks.remove(indexOfMinValue);
+            }
+        });
         return totalSubjectsFailed.size();
     }
 
@@ -87,11 +115,18 @@ public class Common {
         return (double) (sum / col.size());
     }
 
-    /* Convert an HashMap reference-Object into ArrayList*/
-    public static ArrayList<Integer> convertObjToArrayList(Object obj) {
+    /* Convert an HashMap reference-Object values into ArrayList*/
+    public static ArrayList<Integer> convertObjValuesToArrayList(Object obj) {
         HashMap<String, Integer> map = (HashMap<String, Integer>) obj;
         Collection<Integer> values = map.values();
         ArrayList<Integer> list = new ArrayList<>(values);
+        return list;
+    }
+
+    /* Convert an HashMap reference-Object keys into Set*/
+    public static Set<String> convertObjKeysToSet(Object obj) {
+        HashMap<String, Integer> map = (HashMap<String, Integer>) obj;
+        Set<String> list = (Set<String>) map.keySet();
         return list;
     }
 }

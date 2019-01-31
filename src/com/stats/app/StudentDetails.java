@@ -1,7 +1,6 @@
 package com.stats.app;
 
 import com.stats.app.utility.Common;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -21,24 +20,9 @@ public class StudentDetails {
         return this.marks;
     }
 
-    public int getId() {
-        return id;
-    }
 
     private String getName() {
         return name;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setMarks(HashMap<String, Integer> marks) {
-        this.marks = marks;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     /* Display the student details along with marks respectively*/
@@ -71,11 +55,10 @@ public class StudentDetails {
             list.add(hashMap);  // To store the complete students details
             subjectsTotalList.add(mappingData.size());  // To store the total subjects attended by students
         }
-        System.out.println();
+        System.out.println();   // Create  a new line for spacing
 
         Common.setList(list);         // Passing the arraylist with HashMap generics for furthuer purpose
         Common.setTotalSubject(subjectsTotalList);    // Passing the arraylist with HashMap generics for furthuer purpose
-
     }
 }
 

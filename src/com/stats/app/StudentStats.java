@@ -15,12 +15,16 @@ public class StudentStats {
         System.out.println("---------------***---------------");
     }
 
+    //  Constructor
     public StudentStats() {
         this.studentDetailsList = Common.getList();
         this.subjectsTotalList = Common.getTotalSubject();
         displayRespectiveStudentStats();
     }
 
+    /*
+    *   Display the Each student details
+    * */
     public void displayRespectiveStudentStats() {
         final int[] index = {0};
         studentDetailsList.forEach(x -> {
@@ -34,6 +38,7 @@ public class StudentStats {
             }
             // Displaying the Student summary
             System.out.println(x.get("name") + ":");
+            System.out.println("----------");
             System.out.println("Marks: " + marksDetails);
             System.out.println("Total Subjects: " + subjectsTotalList.get(index[0]));
             System.out.println("Subjects Failed: " + failedSubjectsNumber);
@@ -41,10 +46,8 @@ public class StudentStats {
             index[0]++; // incrementing the index
             System.out.println();
         });
+        SubjectStats subjectStats = new SubjectStats();
     }
 
-    public void displayRespectiveSubjectStats() {
-
-    }
 
 }

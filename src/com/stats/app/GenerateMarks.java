@@ -18,7 +18,7 @@ public class GenerateMarks {
         for (int i = 0; i < 5; i++) {
             int selectRandomSubject = random.nextInt(7);
             int selectRandomMarks = random.nextInt(100);
-
+            System.out.println("select random marks " + selectRandomMarks);
             String subjectName = String.valueOf(subjectsList[selectRandomSubject]);
             map.put(subjectName, selectRandomMarks);
         }
