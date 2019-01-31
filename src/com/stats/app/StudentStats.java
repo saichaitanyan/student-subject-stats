@@ -3,7 +3,6 @@ package com.stats.app;
 import com.stats.app.utility.Common;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -38,8 +37,14 @@ public class StudentStats {
             System.out.println("Marks: " + marksDetails);
             System.out.println("Total Subjects: " + subjectsTotalList.get(index[0]));
             System.out.println("Subjects Failed: " + failedSubjectsNumber);
+            Common.calculateMinMaxAvg();    // Calculate the min,max & avg value
             index[0]++; // incrementing the index
+            System.out.println();
         });
+    }
+
+    public void displayRespectiveSubjectStats() {
+
     }
 
 }
